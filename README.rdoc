@@ -28,7 +28,7 @@ Basic example:
 	
 	# Then the standard chipmunk stuff follows
 	@body = CP::Body.new(Float::MAX, Float::MAX)
-  @shape = CP::Shape::Poly.new(@body, @points.to_chipmunk, CP::Vec2.new(100, 100))
+	@shape = CP::Shape::Poly.new(@body, @points.to_chipmunk, CP::Vec2.new(100, 100))
 	# ... etc
 
 

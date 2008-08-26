@@ -22,11 +22,12 @@ class GameWindow < Gosu::Window
 		# Since there's some odd shapes in this SVG collision isn't working (only convex polygons with chipmunk)
 		#
 		@game_objects = []
-		@game_objects << GameObject.new(:x => 100, :y => 0, :id => :boulder)
-		@game_objects << GameObject.new(:x => 300, :y => 0, :id => :triangle)
-		@game_objects << GameObject.new(:x => 400, :y => 200, :id => :hat)
-		@game_objects << GameObject.new(:x => 600, :y => 200, :id => :thing)
-				
+		@game_objects << PathObject.new(:x => 100, :y => 0, :id => :boulder)
+		@game_objects << PathObject.new(:x => 300, :y => 0, :id => :triangle)
+		@game_objects << PathObject.new(:x => 400, :y => 200, :id => :hat)
+		@game_objects << PathObject.new(:x => 600, :y => 200, :id => :thing)
+		@game_objects << RectObject.new(:x => 100, :y => 300, :id => :rect)
+
     @dt = (1.0/60.0)
 		@space = CP::Space.new
     @space.damping = 0.9
@@ -61,15 +62,8 @@ class GameObject
   def initialize(options = {})		
 		@x = options[:x] || 100.0
 		@y = options[:y] || 200.0
-		@color = Gosu::Color.new(255,255,255,255)
 		@id = options[:id] || nil
-		
-		#
-		# The magic
-		# Open a SVG-file, get the points for "path" with id @id
-		# Normalize the points/coordinates (meaning the leftmost coordinate will have x=0, same with top)
-		#
-		@points = SVGParser.new("inkscape_objects.svg").path(@id).normalize!
+		@color = Gosu::Color.new(255,255,255,255)
 		
 		#
 		# Standard chipmunk stuff
@@ -116,7 +110,24 @@ class GameObject
 	end
 end
 
+class PathObject < GameObject
+	def initialize(options = {})
+		@id = options[:id] || nil	
+		# Open a SVG-file, get the points for "path" with id @id
+		# Normalize the points/coordinates (meaning the leftmost coordinate will have x=0, same with top)
+		@points = SVGParser.new("inkscape_objects.svg").path(@id).normalize!
+		super
+	end
+end
+
+class RectObject < GameObject
+	def initialize(options = {})
+		@id = options[:id] || nil	
+		# Open a SVG-file, get the points for "rect" with id @id
+		# Normalize the points/coordinates (meaning the leftmost coordinate will have x=0, same with top)
+		@points = SVGParser.new("inkscape_objects.svg").rect(@id).normalize!
+		super
+	end
+end
+
 GameWindow.new.show
-
-
-

@@ -41,10 +41,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="938"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4" />
+     inkscape:window-width="1016"
+     inkscape:window-height="868"
+     inkscape:window-x="41"
+     inkscape:window-y="34" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -84,5 +84,24 @@
        d="M 383.32974,687.69643 L 383.32974,766.65949 L 671.90382,762.35241 L 671.90382,673.33951 L 554.17708,679.08228 L 568.534,508.23494 L 429.27189,512.54202 L 446.50019,684.82505 L 383.32974,687.69643 z"
        id="hat"
        inkscape:label="#path2413" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:18.17716598999999900;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle"
+       sodipodi:cx="552.02356"
+       sodipodi:cy="419.22205"
+       sodipodi:rx="71.06675"
+       sodipodi:ry="73.220291"
+       d="M 623.09031,419.22205 A 71.06675,73.220291 0 1 1 480.95681,419.22205 A 71.06675,73.220291 0 1 1 623.09031,419.22205 z"
+       transform="matrix(1.5050505,0,0,1.1862745,-367.81268,-104.65068)"
+       inkscape:label="#path2435" />
+    <rect
+       style="opacity:1;fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:18.17716598999999900;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect"
+       width="160.7975"
+       height="111.98397"
+       x="182.33287"
+       y="697.74628"
+       inkscape:label="#rect2437" />
   </g>
 </svg>

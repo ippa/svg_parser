@@ -19,13 +19,41 @@ class SVGParser
 		@fh = open(@filename)	if @filename.is_a? String
 		
 		@paths = Hash.new
+		@rects = Hash.new
 		
 		@doc = Hpricot(@fh)
 	end
 
 	def inspect; @doc; end
 	def to_s;	@doc.to_s;	end
-	
+
+	#
+	# Get points for a "path" (inkscape Shift+F6) with a certain id
+	#
+	def rect(id)
+		points = Points.new
+		
+		if rect = @doc.at("//g rect[@id='#{id.to_s}']")
+			#
+			# Generate all the points in a rectangle
+			#
+			top_left = [rect[:x].to_f, rect[:y].to_f]
+			top_right = [rect[:x].to_f + rect[:width].to_f, rect[:y].to_f ]
+			bottom_right = [rect[:x].to_f + rect[:width].to_f, rect[:y].to_f + rect[:height].to_f ]
+			bottom_left = [rect[:x].to_f, rect[:y].to_f + rect[:height].to_f ]
+			points << top_left
+			points << top_right
+			points <<  bottom_right
+			points << bottom_left
+			points << top_left
+		end
+		
+		puts points.inspect
+		puts
+		@rects[id.to_sym] = points
+	end
+
+
 	#
 	# Get points for a "path" (inkscape Shift+F6) with a certain id
 	#
@@ -38,7 +66,8 @@ class SVGParser
 				points << [x.to_f, y.to_f]	if x and y
 			end
 		end
-		
+		puts points.inspect
+		puts
 		@paths[id.to_sym] = points
 	end
 

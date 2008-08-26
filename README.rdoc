@@ -15,7 +15,30 @@ Plus you have the coordinates available for collisiondetection or whatever.
 - Normalize points for any object
 - Convert points to a chipmunk vec2 array with #to_chipmunk
 
-The term "point" here is used for a X,Y pair.
+The term "point" here is used for a X,Y pair. svg_parser provides the supportclass Points for this purpose.
+
+== Examples:
+
+Basic example:
+
+	# Open a SVG-file, get the points for "path" with id @id
+	# Normalize the points/coordinates (meaning the leftmost coordinate will have x=0, same with top)
+	# "boulder" is the uniqe id you set in inkscape
+	@points = SVGParser.new("inkscape_objects.svg").path("boulder").normalize!
+	
+	# Then the standard chipmunk stuff follows
+	@body = CP::Body.new(Float::MAX, Float::MAX)
+  @shape = CP::Shape::Poly.new(@body, @points.to_chipmunk, CP::Vec2.new(100, 100))
+	# ... etc
+
+
+The Points-class also adds various other nice things like:
+	points = Points.new(0,0)
+	points.up(10).right(100).up(20).right(20).down(20).right(20).down(10).to(0,0)
+	
+	# This is rubygame-code
+	surface.draw_polygon_s(points, Color[:green])
+
 
 == License
 

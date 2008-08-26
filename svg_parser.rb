@@ -46,10 +46,7 @@ class SVGParser
 			points <<  bottom_right
 			points << bottom_left
 			points << top_left
-		end
-		
-		puts points.inspect
-		puts
+		end		
 		@rects[id.to_sym] = points
 	end
 
@@ -66,8 +63,6 @@ class SVGParser
 				points << [x.to_f, y.to_f]	if x and y
 			end
 		end
-		puts points.inspect
-		puts
 		@paths[id.to_sym] = points
 	end
 

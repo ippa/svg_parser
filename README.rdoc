@@ -1,0 +1,22 @@
+= svg_parser README
+
+== What is it?
+A rubylibrary to read SVG-files (generated with for example inkscape) and convert them easily into coordinates/points.
+The mainpurpose of this lib is to easily get read out objects from SVGs to use with Gosu / Rubygame / Chipmunk.
+
+You could for example parse out any "path" (Shift+F6) painted in inkscape and then paint it with rubygames #polygon.
+Therefore bypassing the need to export the SVG to a bitmap, which you then paint.
+Plus you have the coordinates available for collisiondetection or whatever.
+
+== Features:
+
+- Read out the points of a path
+- Read out the points of a rect
+- Normalize points for any object
+- Convert points to a chipmunk vec2 array with #to_chipmunk
+
+The term "point" here is used for a X,Y pair.
+
+== License
+
+Same as chipmunk.

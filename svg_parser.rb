@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'hpricot'
 require 'gosu'		rescue nil
-require 'points'
+require File.join(File.dirname(__FILE__), "points")
+
 
 #
 # SVGParser - Reads out info from a SVGfile
@@ -41,11 +42,11 @@ class SVGParser
 			top_right = [rect[:x].to_f + rect[:width].to_f, rect[:y].to_f ]
 			bottom_right = [rect[:x].to_f + rect[:width].to_f, rect[:y].to_f + rect[:height].to_f ]
 			bottom_left = [rect[:x].to_f, rect[:y].to_f + rect[:height].to_f ]
+			
 			points << top_left
-			points << top_right
-			points <<  bottom_right
 			points << bottom_left
-			points << top_left
+			points << bottom_right
+			points << top_right
 		end		
 		@rects[id.to_sym] = points
 	end
@@ -62,6 +63,8 @@ class SVGParser
 				x, y = point.split(",")
 				points << [x.to_f, y.to_f]	if x and y
 			end
+		else
+			raise "Cant find item with id=#{id.to_s}"
 		end
 		@paths[id.to_sym] = points
 	end

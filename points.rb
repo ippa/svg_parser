@@ -18,6 +18,9 @@ class Points
 		
 		@points = []
 		@points = [[@x, @y]]	if @x and @y
+		
+		@width = nil
+		@height = nil
 	end
 
 	def inspect
@@ -82,6 +85,21 @@ class Points
 		@points << point
 	end
 	
+
+	def center_x
+		width / 2
+	end
+	def width
+		@width ||= @points.collect { |p| p[0] }.max
+	end
+
+	def center_y
+		height / 2
+	end
+	def height
+		@height ||= @points.collect { |p| p[1] }.max
+	end
+
 	#
 	# Returns size as an array [width, height]
 	#
@@ -93,29 +111,36 @@ class Points
 		end
 		return [x,y]
 	end
-		
+	
+	#
+	#
+	#
 	def normalize!
-		lowest_x = lowest_y = nil
+		@points = self.normalize
+	end
 
+	#
+	#
+	#
+	def normalize
+		lowest_x = lowest_y = nil
+		
 		@points.each do |point|
 			lowest_x ||= point[0]
 			lowest_y ||= point[1]
-			
 			lowest_x = point[0]		if point[0] < lowest_x and point[0] > 0
 			lowest_y = point[1]		if point[1] < lowest_y and point[1] > 0
 		end
-		@points.each do |point|
-			point[0] -= lowest_x
-			point[1] -= lowest_y
-		end
-		self
-	end
 		
+		@points.collect { |point|	[point[0]-lowest_x, point[1]-lowest_y] }
+	end
+
 	#
 	# Returns all points in chipmunks vec2-format
 	#
 	def to_chipmunk
-		@points.collect { |point| vec2(point[0].to_i,point[1].to_i)}
+		self.normalize!
+		@points.collect { |point| vec2(point[0] - self.center_x, point[1] - self.center_y) }
 	end
 	
 	
